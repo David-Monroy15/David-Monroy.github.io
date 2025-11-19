@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Estética Marlene - Belleza, Salud y Bienestar</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    /* === PALETA DE COLORES === */
+    :root {
+      --color-fondo-base: #FFFFFF;
+      --color-fondo-secundario: #F4F0EF;
+      --color-marca: #B39CD0;
+      --color-acento: #E9D9E9;
+      --color-texto-oscuro: #333333;
+      --color-texto-claro: #555555;
+      --fuente-titulo: 'Georgia', serif;
+      --fuente-cuerpo: 'Arial', sans-serif;
+    }
+
+    body {
+      font-family: var(--fuente-cuerpo);
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-fondo-base);
+      color: var(--color-texto-oscuro);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      /* Ocultar elementos que serán revelados */
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+
+    .contenedor {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 30px;
+    }
+
+    section {
+      padding: 80px 0;
+      background-color: var(--color-fondo-base);
+    }
+
+    #catalogo { background-color: var(--color-fondo-secundario); }
+
+    h1, h2, h3 {
+      font-family: var(--fuente-titulo);
+      color: var(--color-marca);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 { font-size: 3.2em; color: var(--color-texto-oscuro); }
+    h2 { font-size: 2.5em; }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--color-texto-claro);
+      margin-bottom: 40px;
+    }
+
+    /* === HEADER === */
+    .main-header {
+      background-color: var(--color-fondo-base);
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      /* Animación de entrada para el header */
+      animation: slideDown 0.5s ease-out;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--color-marca);
+      transition: transform 0.3s ease; /* Transición para el efecto hover */
+    }
+    
+    /* Efecto hover al logo */
+    .logo:hover {
+      transform: scale(1.05) rotate(-1deg);
+    }
+
+    .logo img {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Texto del logo con fuente elegante */
+    .logo span {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.3em;
+      font-weight: 500;
+      color: var(--color-marca);
+      letter-spacing: 1px;
+    }
+
+    .main-nav a {
+      color: var(--color-texto-claro);
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .main-nav a:hover { 
+      color: var(--color-marca); 
+      text-shadow: 0 0 5px rgba(179, 156, 208, 0.5); /* Sombra al pasar el mouse */
+    }
+
+    /* === BOTONES === */
+    .btn-principal, .btn-secundario, .btn-menu {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Añadida transición para sombra */
+      border: 2px solid var(--color-acento);
+      cursor: pointer;
+    }
+
+    .btn-principal, .btn-menu {
+      background-color: var(--color-acento);
+      color: var(--color-texto-oscuro);
+      border: none;
+    }
+
+    .btn-principal:hover, .btn-menu:hover {
+      background-color: #D3C1D3;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra al hacer hover */
+    }
+
+    .btn-secundario {
+      background-color: transparent;
+      color: var(--color-marca);
+      border-color: var(--color-marca);
+    }
+
+    .btn-secundario:hover {
+      background-color: var(--color-marca);
+      color: var(--color-fondo-base);
+      box-shadow: 0 5px 15px rgba(179, 156, 208, 0.5); /* Sombra de color de marca */
+    }
+
+    /* === ANIMACIONES KEYFRAMES === */
+    /* Animación para el header al cargar */
+    @keyframes slideDown {
+      0% { transform: translateY(-100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    
+    /* Animación de entrada (Scroll Reveal) */
+    @keyframes fadeInSlideUp {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Clase para los elementos que deben animarse */
+    .animate-on-scroll {
+      opacity: 0;
+    }
+    
+    .animate-on-scroll.is-visible {
+      animation: fadeInSlideUp 0.8s ease-out forwards;
+    }
+    
+    /* Retrasos de animación para el grid de servicios */
+    .servicios-grid .servicio-card:nth-child(1).is-visible { animation-delay: 0.1s; }
+    .servicios-grid .servicio-card:nth-child(2).is-visible { animation-delay: 0.2s; }
+    .servicios-grid .servicio-card:nth-child(3).is-visible { animation-delay: 0.3s; }
+    
+    /* Animación específica para el texto del Hero */
+    .hero-text.is-visible {
+      animation: fadeInSlideUp 1s ease-out forwards;
+    }
+    
+    /* Animación específica para la imagen del Hero */
+    .hero-image.is-visible {
+      animation: fadeInSlideUp 1s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    /* === SECCIÓN PRINCIPAL === */
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 70vh;
+      gap: 40px;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-image {
+      flex: 1;
+      height: 800px;
+      background-image: url('https://i.postimg.cc/KYG4y2nW/Whats-App-Image-2025-11-03-at-12-57-12-AM.jpg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* === CATÁLOGO === */
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .servicio-card {
+      background-color: var(--color-fondo-base);
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      /* Añadir perspectiva y transformar en hover */
+      perspective: 1000px;
+    }
+
+    .servicio-card:hover {
+      transform: translateY(-5px) scale(1.02); /* Escala ligeramente */
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--color-marca); /* Borde sutil al hacer hover */
+    }
+
+    .servicio-icon {
+      font-size: 2.5em;
+      color: var(--color-marca);
+      margin-bottom: 15px;
+      /* Animación de rebote sutil en hover */
+      transition: transform 0.3s ease;
+    }
+    
+    .servicio-card:hover .servicio-icon {
+        transform: translateY(-5px) rotate(5deg);
+    }
+
+    .precio {
+      font-weight: bold;
+      color: var(--color-marca);
+      margin-top: 10px;
+      /* Efecto de pulso de color */
+      animation: colorPulse 2s infinite alternate;
+    }
+
+    @keyframes colorPulse {
+      0% { color: var(--color-marca); }
+      100% { color: #8F72A5; } /* Un tono un poco más oscuro de la marca */
+    }
+
+    /* === GALERÍA === */
+    .galeria-section {
+      background-color: var(--color-fondo-secundario);
+      padding-bottom: 120px;
+    }
+
+    .carrusel-container {
+      position: relative;
+      max-width: 400px;
+      margin: 40px auto 0;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .carrusel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carrusel-item {
+      min-width: 100%;
+      display: none;
+      height: 500px;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carrusel-item.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .carrusel-nav button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(179, 156, 208, 0.7);
+      color: white;
+      border: none;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 1.5em;
+      z-index: 50;
+      border-radius: 5px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .carrusel-nav button:hover { 
+      background: var(--color-marca); 
+      transform: translateY(-50%) scale(1.1); /* Efecto en el botón */
+    }
+
+    .prev-btn { left: 15px; }
+    .next-btn { right: 15px; }
+    
+    /* === FORMULARIO === */
+    .form-flex {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      padding: 40px 30px;
+      background-color: var(--color-fondo-secundario);
+      border-radius: 15px;
+    }
+
+    .contacto-info {
+      flex: 1;
+      padding: 20px;
+      border-right: 1px solid #ddd;
+    }
+
+    .contacto-info p {
+      color: var(--color-texto-claro);
+      margin-bottom: 15px;
+    }
+
+    .contacto-info i {
+      margin-right: 10px;
+      color: var(--color-marca);
+      /* Pequeño efecto de color al icono */
+      transition: color 0.3s ease;
+    }
+    
+    .contacto-info p:hover i {
+        color: #8F72A5; /* Ligeramente más oscuro al pasar el mouse */
+    }
+
+    .formulario-cita {
+      flex: 2;
+      padding: 20px;
+    }
+
+    .formulario-cita label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: var(--color-marca);
+    }
+
+    .formulario-cita input,
+    .formulario-cita select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 1em;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición para el foco */
+    }
+    
+    /* Efecto de foco en inputs */
+    .formulario-cita input:focus,
+    .formulario-cita select:focus {
+        border-color: var(--color-marca);
+        box-shadow: 0 0 5px rgba(179, 156, 208, 0.5);
+        outline: none;
+    }
+
+    .inline-fields { display: flex; gap: 20px; }
+    .inline-fields > div { flex: 1; }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 30px;
+      padding: 15px 20px;
+    }
+    
+    /* === UBICACIÓN ADICIONAL (Agregado en la respuesta anterior) === */
+    .location-info {
+        background-color: #f8f8f8;
+        padding: 20px 0;
+        text-align: center;
+        border-top: 1px solid #eee;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+    }
+    
+    .location-info:hover {
+        background-color: #F0F0F0;
+    }
+
+    .location-info .location-icon {
+        font-size: 24px;
+        color: var(--color-marca);
+        margin-bottom: 5px;
+        display: block;
+        width: 100%;
+        transition: transform 0.3s;
+    }
+    
+    .location-info:hover .location-icon {
+        transform: rotate(-5deg) scale(1.1);
+    }
+
+    .location-info p {
+        margin: 0;
+        font-size: 16px;
+        color: var(--color-texto-claro);
+    }
+    /* ============================================================= */
+
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background-color: #333;
+      color: white;
+      font-size: 0.9em;
+    }
+    
+    footer .contenedor {
+        /* Para que el texto no se mueva */
+        transition: color 0.3s ease;
+    }
+    
+    footer:hover .contenedor p {
+        color: var(--color-marca);
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .header-content, .main-nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main-nav a { margin: 5px 10px; }
+
+      .hero-section, .form-flex {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-image { height: 300px; }
+
+      .contacto-info {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body id="body">
+
+  <header class="main-header">
+    <div class="contenedor header-content">
+      <div class="logo">
+        <img src="https://i.postimg.cc/28QtBRZW/Whats-App-Image-2025-11-01-at-12-29-05-AM.jpg" alt="Logo Glamour">
+        <span>Estética Marlene</span>
+      </div>
+      <nav class="main-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#galeria">Galería</a>
+        <a href="#citas" class="btn-menu">Agendar Cita</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="inicio" class="contenedor hero-section">
+    <div class="hero-text animate-on-scroll">
+      <h1>Descubre el Arte del Cuidado Personal</h1>
+      <p>En <strong>Glamour Estética</strong> combinamos la tecnología de vanguardia con el arte del bienestar. Tu salud y belleza son nuestra prioridad.</p>
+      <a href="#citas" class="btn-principal">Reservar Citas</a>
+    </div>
+    <div class="hero-image animate-on-scroll"></div>
+  </section>
+
+  <section id="catalogo" class="contenedor catalogo-section">
+    <h2 class="animate-on-scroll">💄 Nuestro Catálogo de Servicios</h2>
+    <p class="section-subtitle animate-on-scroll">Tratamientos diseñados para realzar tu belleza y bienestar.</p>
+
+    <div class="servicios-grid">
+      <article class="servicio-card animate-on-scroll">
+        <i class="fa-solid fa-paint-brush servicio-icon"></i>
+        <h3>Tinte de Cabello</h3>
+        <p>Transforma tu look con colores vibrantes o naturales. Usamos tintes de alta calidad que cuidan tu cabello y resaltan tu personalidad.</p>
+        <p class="precio">$750 - 3 Hrs.</p>
+      </article>
+      
+      <article class="servicio-card animate-on-scroll">
+        <i class="fa-solid fa-scissors servicio-icon"></i>
+        <h3>Peinados</h3>
+        <p>Desde recogidos elegantes hasta estilos modernos. Peinados ideales para cualquier ocasión que reflejan tu estilo y belleza.</p>
+        <p class="precio">$300 - 60 min.</p>
+      </article>
+
+      <article class="servicio-card animate-on-scroll">
+        <i class="fa-solid fa-hand-sparkles servicio-icon"></i>
+        <h3>Nails</h3>
+        <p>Uñas impecables con nuestros servicios de manicure, gelish y diseños personalizados. ¡Resalta tus manos con glamour!</p>
+        <p class="precio">$550 - 2 Hrs.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="galeria" class="galeria-section">
+    <div class="contenedor">
+      <h2 class="animate-on-scroll">📸 Resultados que Inspiran </h2>
+      <div class="carrusel-container animate-on-scroll">
+        <div class="carrusel">
+          <img src="https://i.postimg.cc/5N3vDnzg/Whats-App-Image-2025-11-03-at-12-15-11-AM.jpg" alt="Tinte de Cabello" class="carrusel-item active">
+          <img src="https://i.postimg.cc/P59pYcZm/Whats-App-Image-2025-11-02-at-11-39-25-PM.jpg" alt="Diseño de uñas profesional" class="carrusel-item">
+          <img src="https://i.postimg.cc/15t55HTJ/Whats-App-Image-2025-11-03-at-12-17-39-AM.jpg" alt="Área de masaje y relax" class="carrusel-item">
+        </div>
+        <div class="carrusel-nav">
+          <button onclick="cambiarSlide(-1)" class="nav-btn prev-btn">❮</button>
+          <button onclick="cambiarSlide(1)" class="nav-btn next-btn">❯</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="citas" class="citas-section">
+    <div class="contenedor form-flex animate-on-scroll">
+      <div class="contacto-info">
+        <h3>Reserva tu Experiencia</h3>
+        <p>Estamos comprometidos con tu bienestar. Rellena el formulario y te confirmaremos la disponibilidad lo antes posible.</p>
+        <p><i class="fas fa-phone"></i> +52 55 1234 5678</p>
+        <p><i class="fas fa-envelope"></i> info@Marlenestetica.com</p>
+        <p><i class="fas fa-map-marker-alt location-icon"></i>Calle Revolucion Lot. 88, Francisco Villa, Cuautitlán Izcalli, Edo. México.</p>
+      </div>
+      
+    <form>
+        <label for="nombre">Nombre Completo:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="servicio">Servicio:</label>
+        <select id="servicio" name="servicio" required>
+          <option value="">Selecciona un Servicio...</option>
+          <option value="tinte">Tinte de Cabello</option>
+          <option value="peinado">Peinado</option>
+          <option value="nails">Nails</option>
+        </select>
+        
+        <div class="inline-fields">
+          <div>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div>
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" name="hora" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-principal submit-btn">Confirmar Reserva</button>
+      </form>
+    </div>
+  </section>
+  
+
+  <footer>
+    <div class="contenedor">
+      <p>&copy; 2025 Glamour Estética | Belleza, Salud y Bienestar.</p>
+    </div>
+  </footer>
+
+  <script>
+    // --- Carrusel ---
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.carrusel-item');
+
+    function mostrarSlide(n) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slideIndex = (n + slides.length) % slides.length;
+      slides[slideIndex].classList.add('active');
+    }
+
+    function cambiarSlide(n) {
+      mostrarSlide(slideIndex + n);
+    }
+
+    mostrarSlide(slideIndex);
+    
+    // Auto-avance del carrusel
+    setInterval(() => {
+        cambiarSlide(1);
+    }, 5000); // Cambia cada 5 segundos
+
+    // --- Scroll suave ---
+    document.querySelectorAll('.main-nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        if (this.hash !== "") {
+          e.preventDefault();
+          const hash = this.hash;
+          document.querySelector(hash).scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // --- Scroll Reveal (Animación de entrada) ---
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const body = document.getElementById('body');
+    
+    // Función para mostrar el body después de un pequeño retraso (efecto de carga)
+    function showBody() {
+        body.style.opacity = '1';
+    }
+    
+    // Función que revisa si el elemento está visible en el viewport
+    function checkVisibility() {
+      animatedElements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        // El elemento es visible si su parte superior está por encima del 80% del viewport
+        if (rect.top < window.innerHeight - (window.innerHeight * 0.2)) {
+          element.classList.add('is-visible');
+        }
+      });
+    }
+
+    // Event Listeners
+    window.addEventListener('scroll', checkVisibility);
+    window.addEventListener('resize', checkVisibility);
+    
+    // Ejecutar al cargar la página para animar los elementos iniciales y mostrar el body
+    window.onload = () => {
+        showBody();
+        checkVisibility();
+    };
+    
+  </script>
+</body>
+</html>
